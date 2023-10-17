@@ -37,11 +37,25 @@ namespace FarmingFeedingthisverson
             Console.WriteLine("------------------------------------");
             for (int i = 0; i < 7; i++)
             {
+                float foodConsumed = 0;
+                bool validInput = false;
 
-                Console.Write("Enter the amount of food consumed per grams for day {0}\n", i + 1);
-                //foodConsumed = Convert.ToInt32(Console.ReadLine());
-                testAH.AddFoodConsumed ( (float)Convert.ToDouble(Console.ReadLine()));
+                while (!validInput)
+                {
+                    Console.Write($"Enter the amount of food consumed per grams for day {i + 1}: ");
+                    string input = Console.ReadLine();
 
+                    if (float.TryParse(input, out foodConsumed))
+                    {
+                        validInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Please enter a valid number for food consumption.\n");
+                    }
+                }
+
+                testAH.AddFoodConsumed(foodConsumed);
             }
             Console.WriteLine("------------------------------------");
             Console.WriteLine($"Total Amount of food consumed in the Week\n {testAH.CalculateWeeklyConsumption()}g");
